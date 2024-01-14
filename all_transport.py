@@ -19,7 +19,8 @@ class Transport:
     def go(self, distance):
         if self.check_fuel(distance):
             self.fuel_in_tank -= self.consumption_fuel * distance
-            print(f'Едем {distance} км. Израсходовали {self.consumption_fuel * distance} литров.\n'f'В баке осталось {self.fuel_in_tank} литров')
+            print(f'Едем {distance} км. Израсходовали {self.consumption_fuel * distance} литров.\n'
+                  f''f'В баке осталось {self.fuel_in_tank} литров')
 
 
 
