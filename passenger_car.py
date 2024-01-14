@@ -7,6 +7,6 @@ class PassengerCar(Transport):
 
 
 if __name__ == '__main__':
-    p_car = PassengerCar('Ai 95', 50, 1, 4, 'Green')
+    p_car = PassengerCar('Ai 95', 50, 10, 4, 'Green')
     print(p_car)
-    p_car.go(10)
+    p_car.go(100)
