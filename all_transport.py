@@ -14,7 +14,7 @@ class Transport:
         self.consumption_fuel /= 100
 
     def beep(self):
-        pass
+        playsound('C:\\Users\\Сергей\\Desktop\\Python\\P.Projects\\Transport\\p_car_sound.mp3')
 
     def check_fuel(self, distance):
         return (self.fuel_in_tank - self.consumption_fuel * distance) >= 0
@@ -29,5 +29,4 @@ class Transport:
 
 
 if __name__ == '__main__':
-    t = Transport('B', 'red')
-    print(t)
+    pass
