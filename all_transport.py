@@ -6,12 +6,14 @@ class Transport:
     type_fuel: str
     size_fuel_tank: int
     consumption_fuel: int
-    wheels: int
     color: str
 
     def __post_init__(self):
         self.fuel_in_tank = self.size_fuel_tank
         self.consumption_fuel /= 100
+
+    def beep(self):
+        pass
 
     def check_fuel(self, distance):
         return (self.fuel_in_tank - self.consumption_fuel * distance) >= 0
