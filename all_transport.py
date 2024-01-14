@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from playsound import playsound
 
 
 @dataclass
