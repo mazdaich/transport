@@ -1,9 +1,10 @@
 from dataclasses import dataclass
-
+from abc import ABC, abstractmethod
+from playsound import playsound
 
 
 @dataclass
-class Transport:
+class Transport(ABC):
     type_fuel: str
     size_fuel_tank: int
     consumption_fuel: int
@@ -13,6 +14,7 @@ class Transport:
         self.fuel_in_tank = self.size_fuel_tank
         self.consumption_fuel /= 100
 
+    @abstractmethod
     def beep(self):
         pass
 
@@ -21,6 +23,7 @@ class Transport:
 
     def go(self, distance):
         if self.check_fuel(distance):
+            playsound('C:\\sound_for_python\\starting-p_car.mp3')  #звук должен быть изменяем КАК СДЕЛАТЬ?
             self.fuel_in_tank -= self.consumption_fuel * distance
             print(f'Едем {distance} км. Израсходовали {self.consumption_fuel * distance} литров.\n'
                   f''f'В баке осталось {self.fuel_in_tank} литров')
