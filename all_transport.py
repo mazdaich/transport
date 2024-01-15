@@ -23,7 +23,7 @@ class Transport(ABC):
 
     def go(self, distance):
         if self.check_fuel(distance):
-            playsound('C:\\sound_for_python\\starting-p_car.mp3')  #звук должен быть изменяем КАК СДЕЛАТЬ?
+            playsound('C:\\P.Projects\\Transport\\sound_for_python\\starting-p_car.mp3')  #звук должен быть изменяем КАК СДЕЛАТЬ?
             self.fuel_in_tank -= self.consumption_fuel * distance
             print(f'Едем {distance} км. Израсходовали {self.consumption_fuel * distance} литров.\n'
                   f''f'В баке осталось {self.fuel_in_tank} литров')

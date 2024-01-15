@@ -4,7 +4,7 @@ from playsound import playsound
 
 class PassengerCar(Transport):
     def beep(self):
-        playsound('C:\\sound_for_python\\p_car_sound.mp3')
+        playsound('C:\\P.Projects\\Transport\\sound_for_python\\p_car_sound.mp3')
 
 
 if __name__ == '__main__':
