@@ -37,6 +37,8 @@ class Transport(ABC):
                 self.fuel_in_tank += res
                 print(f'Заправили до полного {res} л. В баке {self.fuel_in_tank} л.')
             else:
+                if not isinstance(quantity, int | float):
+                        raise TypeError('ОШИБОЧКА. Количество бензина должно быть указанно цифрами')
                 all_fuel = quantity + self.fuel_in_tank
                 if all_fuel <= self.size_fuel_tank:
                     self.fuel_in_tank += quantity
@@ -46,6 +48,8 @@ class Transport(ABC):
                     print(f'Заправили {res} л. В баке {self.fuel_in_tank} л.\n'
                           f'Возвращено {quantity - res}')
         except FuelType as e:
+            print(e)
+        except TypeError as e:
             print(e)
 
 
