@@ -1,6 +1,7 @@
 import pymysql
 from config_sql import host, user, password, db_name
 from passenger_car import PassengerCar
+from  insert_user import insert_user
 from create_drop_table import create_tables, drop_tables
 
 connection = pymysql.connect(
@@ -17,6 +18,41 @@ with connection.cursor() as cursor:                                 # прове
 
 if not flag:                                                        # создать таблицы (если их нет в БД)
     create_tables(connection, 'users', 'transport')
+
+email = 'Q'                                                         # вход/проверка пользователя
+if email == 'Q':
+    email = input("Введите свою электронную почту\n")
+    with connection.cursor() as cursor:
+        check_email = f"SELECT name FROM users WHERE email = '{email}'"
+        res = cursor.execute(check_email)
+        name = cursor.fetchone()['name'] if res else ''
+    if not res:
+        print('Такого пользователя нет. Пройдите регистрацию')     # регистрация нового пользователя
+        name = input('Your name\n')
+        insert_user(connection, name, input('Password\n'), input('Email\n'))
+    print(f"Добро пожаловать {name}")
+
+order = ''
+while order != 'exit':
+    print(order)
+    order = input("Введите команду\n")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # p_car = PassengerCar('Ai 95', 50, 11, 'Green')
