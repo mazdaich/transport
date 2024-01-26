@@ -20,4 +20,4 @@ def insert_user(user_name, user_password, user_email):
 
 
 if __name__ == '__main__':
-    insert_user('Marina', 'qwerty', 'Marina@gmail.com')
+    insert_user('Timyr', 'qwerty', 'Timyr@gmail.com')

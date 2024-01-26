@@ -25,4 +25,4 @@ def insert_transport(user_name, car_obj):
 
 
 if __name__ == '__main__':
-    insert_transport('Timyr', 'Test_3')
+    insert_transport('Timyr', 'Test_1')
