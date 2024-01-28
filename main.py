@@ -1,7 +1,8 @@
 import pymysql
 from config_sql import host, user, password, db_name
 from passenger_car import PassengerCar
-from  insert_user import insert_user
+from insert_user import insert_user
+from insert_transport import insert_transport
 from create_drop_table import create_tables, drop_tables
 
 connection = pymysql.connect(
@@ -23,14 +24,35 @@ email = 'Q'                                                         # вход/�
 if email == 'Q':
     email = input("Введите свою электронную почту\n")
     with connection.cursor() as cursor:
-        check_email = f"SELECT name FROM users WHERE email = '{email}'"
-        res = cursor.execute(check_email)
-        name = cursor.fetchone()['name'] if res else ''
+        check_email = f"SELECT id, name FROM users WHERE email = '{email}'"
+        cursor.execute(check_email)
+        res = cursor.fetchone()
+    if res:
+        user_id, user_name = res.values()
     if not res:
         print('Такого пользователя нет. Пройдите регистрацию')     # регистрация нового пользователя
-        name = input('Your name\n')
-        insert_user(connection, name, input('Password\n'), input('Email\n'))
-    print(f"Добро пожаловать {name}")
+        user_name = input('Your name\n')
+        password = input('Password\n')
+        email = input('Email\n')
+        insert_user(connection, user_name, password, email)
+        with connection.cursor() as cursor:
+            user_id_query = f"SELECT id FROM users WHERE email = '{email}'"
+            cursor.execute(user_id_query)
+            user_id = cursor.fetchone()['id']
+print(f"Добро пожаловать {user_name}")
+
+
+with connection.cursor() as cursor:
+    obj_query = f"SELECT car_obj FROM transport WHERE autor_id = '{user_id}'"
+    cursor.execute(obj_query)
+    user_objects_list = cursor.fetchall()
+
+if not user_objects_list:
+    print('У Вас пока нет автомобилей в парке. Давай создадим!')
+    car_type = input('Выберите категорию авто (В / С) \n')
+
+
+
 
 order = ''
 while order != 'exit':
