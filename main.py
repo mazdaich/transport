@@ -1,9 +1,9 @@
 import pymysql
 from config_sql import host, user, password, db_name
 from passenger_car import PassengerCar
-from insert_user import insert_user
-from insert_transport import insert_transport
+from insert_update_BD import insert_transport, insert_user, update_transport
 from create_drop_table import create_tables, drop_tables
+import json
 
 connection = pymysql.connect(
     host=host,
@@ -50,6 +50,16 @@ with connection.cursor() as cursor:
 if not user_objects_list:
     print('У Вас пока нет автомобилей в парке. Давай создадим!')
     car_type = input('Выберите категорию авто (В / С) \n')
+    if car_type == 'B':
+        pass
+        # obj = PassengerCar('Ai 95', 50, 11, input('Какого цвета будет авто?\n'))
+        # json_obj = json.dumps(obj.__dict__)
+        # insert_transport(connection, email, 234)
+        # update_transport(connection, json_obj, user_id, 234)
+
+
+
+
 
 
 

@@ -24,10 +24,10 @@ def create_tables(connection, name_table_1, name_table_2):
         with connection.cursor() as cursor:
             create_table_query = f"""CREATE TABLE `{name_table_2}`(
                                     id int AUTO_INCREMENT PRIMARY KEY,
-                                    car_obj varchar(12),
+                                    car_number varchar (6) NOT NULL UNIQUE KEY,
+                                    car_obj JSON,
                                     autor_id int,
-                                    mileage int DEFAULT '0',
-                                    FOREIGN KEY (autor_id)  REFERENCES users (id) ON DELETE CASCADE
+                                    FOREIGN KEY (autor_id)  REFERENCES {name_table_1} (id) ON DELETE CASCADE
                                     );"""
             cursor.execute(create_table_query)
     except Exception as e:

@@ -10,10 +10,17 @@ class Transport(ABC):
     size_fuel_tank: int
     consumption_fuel: int
     color: str
+    x: int = 0
+    y: int = 0
+    mileage: int = 0
+    fuel_in_tank: int = 0
+    flag: bool = False
 
     def __post_init__(self):
-        self.fuel_in_tank = self.size_fuel_tank
-        self.consumption_fuel /= 100
+        if not self.flag:
+            self.fuel_in_tank = self.size_fuel_tank
+            self.consumption_fuel /= 100
+        self.flag = True
 
     @abstractmethod
     def beep(self):
@@ -22,8 +29,10 @@ class Transport(ABC):
     def go(self, distance):
         try:
             LowFuel.check_fuel(self, distance)
-            #playsound('C:\\P.Projects\\Transport\\sound_for_python\\starting-p_car.mp3')  #звук должен быть изменяем КАК СДЕЛАТЬ?
+            playsound('C:\\P.Projects\\Transport\\sound_for_python\\starting-p_car.mp3')  #звук должен быть изменяем КАК СДЕЛАТЬ?
             self.fuel_in_tank -= self.consumption_fuel * distance
+            self.x += distance
+            self.mileage += distance
             print(f'Едем {distance} км. Израсходовали {self.consumption_fuel * distance} л.\n'
                   f''f'В баке осталось {self.fuel_in_tank} л.')
         except LowFuel as e:
