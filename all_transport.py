@@ -2,6 +2,7 @@ from dataclasses import dataclass
 from abc import ABC, abstractmethod
 from playsound import playsound
 from Excep import LowFuel, FuelType
+from random import randint
 
 
 @dataclass
@@ -60,6 +61,21 @@ class Transport(ABC):
             print(e)
         except TypeError as e:
             print(e)
+
+
+def create_car_num(connection):
+    with connection.cursor() as cursor:
+        num_query = f"SELECT car_number FROM transport"
+        cursor.execute(num_query)
+        num_list = [i['car_number'] for i in cursor.fetchall()]
+    num = ''
+    for _ in range(3):
+        num += str(randint(0, 9))
+    if num not in num_list:
+        return num
+    else:
+        create_car_num(connection)
+
 
 
 if __name__ == '__main__':
